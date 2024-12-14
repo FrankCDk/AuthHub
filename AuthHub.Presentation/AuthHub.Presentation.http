@@ -1,0 +1,6 @@
+@AuthHub.Presentation_HostAddress = http://localhost:5092
+
+GET {{AuthHub.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

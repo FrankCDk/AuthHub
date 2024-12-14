@@ -1,0 +1,100 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio working files
+.vscode/
+.vs/
+
+# Log files
+*.log
+
+# Application Insights
+ApplicationInsights.config
+
+# Resharper files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Package directories
+*.nuget/
+packages/
+!packages/build/
+!packages/repositories.config
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# IDE-specific files
+.idea/
+*.sln.iml
+
+# Rider files
+.idea/
+*.sln.iml
+
+# JetBrains Rider
+.idea/
+.idea_modules/
+
+# NCrunch
+.ncrunchsolution/
+
+# Coverlet Coverage Output
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# DotCover
+*.dcvr
+
+# Backup & Report Files
+*.bak
+*.swp
+*~
+*.ncb
+*.aps
+*.pch
+*.pidb
+*.svclog
+*.scc
+
+# Deployment files
+.publish/
+.publish_profiles/
+
+# Docker files
+.docker/
+docker-compose.override.yml
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+*.pdb
+*.mdb
+*.ilk
+*.obj
+*.idb
+*.tlog
+*.log
+*.vspscc
+*.vssscc
+
+# Project-specific files
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Production.json
+appsettings.Staging.json
