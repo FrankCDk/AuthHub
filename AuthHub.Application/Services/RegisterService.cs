@@ -1,10 +1,9 @@
 ﻿using AuthHub.Application.Dto.Register;
 using AuthHub.Application.Interfaces;
+using AuthHub.Common.Utilities;
 using AuthHub.Domain.Entities;
 using AuthHub.Domain.Interfaces;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Org.BouncyCastle.Crypto.Generators;
 
 namespace AuthHub.Application.Services
 {
@@ -13,13 +12,12 @@ namespace AuthHub.Application.Services
 
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        private readonly PasswordHasher<object> _passwordHasher;
+        
 
         public RegisterService(IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
-            _userRepository = userRepository;
-            _passwordHasher = new PasswordHasher<object>();
+            _userRepository = userRepository;            
         }
 
         public async Task<bool> RegisterAsync(RegisterRequest request)
@@ -28,7 +26,7 @@ namespace AuthHub.Application.Services
             {
                 // Mapeamos el request a un objeto de dominio
                 User user = _mapper.Map<User>(request);
-                user.PasswordHash = HashPassword(request.Password);
+                user.PasswordHash = PasswordHasher.HashPassword(request.Password);
                 return await _userRepository.Register(user);
             }
             catch (Exception ex)
@@ -37,12 +35,7 @@ namespace AuthHub.Application.Services
             }
             
 
-        }
-
-        public string HashPassword(string password)
-        {
-            return _passwordHasher.HashPassword(null, password);
-        }
+        }        
 
     }
 }

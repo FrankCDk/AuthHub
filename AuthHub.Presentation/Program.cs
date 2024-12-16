@@ -3,7 +3,6 @@ using AuthHub.Application.Interfaces;
 using AuthHub.Application.Services;
 using AuthHub.Domain.Interfaces;
 using AuthHub.Infrastructure.Connections;
-using AuthHub.Infrastructure.Interfaces;
 using AuthHub.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,14 +20,13 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 //Register services
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
-builder.Services.AddScoped<IDatabaseConnection, MySQLDatabase>(provider =>
+builder.Services.AddScoped<MySQLDatabase>(provider =>
 {
     var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
     return new MySQLDatabase(connectionString);
 });
 
 //Register repositories Domain
-builder.Services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();

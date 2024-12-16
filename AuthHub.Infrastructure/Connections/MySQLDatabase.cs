@@ -1,10 +1,9 @@
-﻿using AuthHub.Infrastructure.Interfaces;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System.Data.Common;
 
 namespace AuthHub.Infrastructure.Connections
 {
-    public class MySQLDatabase : IDatabaseConnection
+    public class MySQLDatabase
     {
       
         private readonly string _connectionString;

@@ -1,6 +1,7 @@
-﻿using AuthHub.Domain.Entities;
+﻿using AuthHub.Common.Utilities;
+using AuthHub.Domain.Entities;
 using AuthHub.Domain.Interfaces;
-using AuthHub.Infrastructure.Interfaces;
+using AuthHub.Infrastructure.Connections;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Text;
@@ -10,9 +11,9 @@ namespace AuthHub.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
 
-        private readonly IDatabaseConnection _databaseConnection;
+        private readonly MySQLDatabase _databaseConnection;
 
-        public UserRepository(IDatabaseConnection databaseConnection)
+        public UserRepository(MySQLDatabase databaseConnection)
         {
             _databaseConnection = databaseConnection;
         }
@@ -50,5 +51,37 @@ namespace AuthHub.Infrastructure.Repositories
            
 
         }
+
+        public async Task<bool> VerifyCredentialsAsync(string username, string password)
+        {
+
+            try
+            {
+                using var cn = _databaseConnection.GetConnection();
+                await cn.OpenAsync();
+
+                using (MySqlCommand cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT PasswordHash FROM users WHERE Username = @username";
+                    cmd.Parameters.Add(new MySqlParameter("@username", username));
+
+                    var result = await cmd.ExecuteScalarAsync();
+                    if (result != null)
+                    {
+                        string storedHashedPassword = result.ToString();
+                        var verificationResult = PasswordHasher.VerifyHashedPassword(storedHashedPassword, password);
+                        return verificationResult == Microsoft.AspNetCore.Identity.PasswordVerificationResult.Success;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+
     }
 }
