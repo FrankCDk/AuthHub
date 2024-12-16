@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuthHub.Common\AuthHub.Common.csproj" />
     <ProjectReference Include="..\AuthHub.Domain\AuthHub.Domain.csproj" />
     <ProjectReference Include="..\AuthHub.Infrastructure\AuthHub.Infrastructure.csproj" />
   </ItemGroup>

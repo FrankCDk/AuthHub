@@ -1,9 +1,10 @@
 ﻿using AuthHub.Application.Dto.Login;
+using AuthHub.Application.Models;
 
 namespace AuthHub.Application.Interfaces
 {
     public interface ILoginService
     {
-        Task<LoginResponse> Login(LoginRequest request);
+        Task<Result<LoginResponse>> Login(LoginRequest request);
     }
 }

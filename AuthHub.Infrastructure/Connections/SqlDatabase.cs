@@ -1,5 +1,4 @@
-﻿using AuthHub.Infrastructure.Interfaces;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.SqlClient;
 
 namespace AuthHub.Infrastructure.Connections

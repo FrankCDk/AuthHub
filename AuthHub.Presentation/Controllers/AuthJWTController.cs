@@ -2,6 +2,7 @@
 using AuthHub.Application.Dto.Register;
 using AuthHub.Application.Dto.Token;
 using AuthHub.Application.Interfaces;
+using AuthHub.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthHub.Presentation.Controllers
@@ -31,11 +32,17 @@ namespace AuthHub.Presentation.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
 
-            LoginResponse response = await _loginService.Login(request);
-            return Ok();
+            Result<LoginResponse> response = await _loginService.Login(request);
+
+            if (response.Success)
+            {
+                return Ok(response.Value);
+            }
+
+            return BadRequest(response.Errors);
+
 
         }
-
 
 
         [HttpPost]
