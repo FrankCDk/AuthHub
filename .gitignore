@@ -1,0 +1,47 @@
+# Compilación
+bin/
+obj/
+
+# Archivos de dependencias y paquetes
+packages/
+!packages/**/*.md
+
+# Archivos generados por NuGet
+project.lock.json
+project.assets.json
+nuget.config
+nuget.exe
+*.nupkg
+*.snupkg
+
+# Archivos de usuario y configuración de IDE
+.vs/
+*.user
+*.suo
+*.vscode/
+*.csproj.user
+*.sln.cache
+*.sln.metaproj
+
+# Archivos de configuración local y secretos
+appsettings.Development.json
+secrets.json
+.env
+
+# Archivos de logs y depuración
+*.log
+logs/
+dump/
+
+# Docker y contenedores
+**/[Dd]ockerfile
+**/[Dd]ocker-compose*
+
+# Configuración de OpenTelemetry y Prometheus
+otel-collector-config.yml
+.prometheus/
+
+# Otros
+*.swp
+*.bak
+*.tmp
