@@ -17,7 +17,7 @@ namespace AuthHub.Infrastructure.Persistence.v1
         #region Obtener el usuario
         public async Task<User> GetUser(DbConnection connection, string dbType, User request)
         {
-            StringBuilder query = new StringBuilder();
+            StringBuilder query = new ();
             List<DbParameter> parameters = new List<DbParameter>();
             User user = new User();
             switch (dbType)

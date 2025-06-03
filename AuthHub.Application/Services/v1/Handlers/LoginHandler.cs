@@ -6,6 +6,7 @@ using AuthHub.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using System.Data.Common;
+using System.Net.Http.Headers;
 
 namespace AuthHub.Application.Services.v1.Handlers
 {
@@ -59,8 +60,13 @@ namespace AuthHub.Application.Services.v1.Handlers
             await cn!.OpenAsync(cancellationToken);
 
             // 4. Obtener el usuario
-            var user = await _userRepository.GetUser(cn, databaseType, usuario);
+            User? user = await _userRepository.GetUser(cn, databaseType, usuario);
 
+            //Validamos si existe el usuario
+            if (user == null) throw new Exception("No se encontro el usuario.");
+            //Validamos si el usuario esta activo
+            if (user.Status != "A") throw new Exception("El usuario no esta Activo.");            
+ 
             // 5. Validar el password
             if(!_passwordHasher.VerifyPassword(usuario.PasswordHash, user.PasswordHash, user.PasswordSalt))
             {
@@ -83,10 +89,12 @@ namespace AuthHub.Application.Services.v1.Handlers
             await cn.CloseAsync();
 
             // 8. Devolver el DTO con el Token
-            LoginDto usuarioDto = new LoginDto()
+            LoginDto usuarioDto = new ()
             {
+                Correo = user.Email,
                 Usuario = user.Username,
                 Token = token,
+                Rol = user.Role.ToString(),
             };
 
             return usuarioDto;

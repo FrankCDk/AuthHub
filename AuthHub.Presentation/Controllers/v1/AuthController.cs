@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthHub.Presentation.Controllers.v1
 {
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/auth")]
     [ApiController]
     [ApiVersion("1.0")]
     public class AuthController : ControllerBase
@@ -37,7 +37,6 @@ namespace AuthHub.Presentation.Controllers.v1
             });
 
         }
-
 
         /// <summary>
         /// Cierre de sesión en la aplicación
